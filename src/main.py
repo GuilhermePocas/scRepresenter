@@ -3,7 +3,6 @@ import argparse
 import faulthandler
 import torch
 from .utils import train_scnet, train_scgpt, combine_embeddings, write_embeddings
-import mlflow
 
 
 def run_scBLOOM(model_name, obj, network, results_dir, scnet_epochs=0, scgpt_epochs=0):
@@ -83,7 +82,7 @@ def run_scBLOOM(model_name, obj, network, results_dir, scnet_epochs=0, scgpt_epo
         return None, scgpt_cell_embeddings, None, None, scgpt_labels
 
     else:
-        print("⚠️ No training performed — both scnet_epochs and scgpt_epochs are 0.")
+        print("No training performed — both scnet_epochs and scgpt_epochs are 0.")
         return None
 
     

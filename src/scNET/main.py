@@ -18,7 +18,6 @@ import pkg_resources
 from tqdm import tqdm
 import warnings
 import torch.nn as nn
-import mlflow
 from sklearn.model_selection import train_test_split
 import pickle
 
@@ -208,8 +207,6 @@ def train(data, loader, highly_variable_index, save_dir ,number_of_batches=5 ,
         "num_layers": NUM_LAYERS,
         "de_genes_num": DE_GENES_NUM
     }
-
-    mlflow.log_params(params)
       
     x_full = data.x.clone()
     if cell_flag:
@@ -314,15 +311,6 @@ def train(data, loader, highly_variable_index, save_dir ,number_of_batches=5 ,
             
             gc.collect()
             torch.cuda.empty_cache()
-
-        mlflow.log_metric("Training Row Loss", epoch_row_loss/number_of_batches, step=epoch)
-        mlflow.log_metric("Training Collumn Loss", epoch_col_loss/number_of_batches, step=epoch)
-        mlflow.log_metric("Training Classifier Loss", epoch_clf_loss/number_of_batches, step=epoch)
-        mlflow.log_metric("Training Final Loss", epoch_final_loss/number_of_batches, step=epoch)
-        mlflow.log_metric("Training AUC", auc, step=epoch)
-        mlflow.log_metric("Lambda Rows", lambda_rows_dynamic, step=epoch)
-        mlflow.log_metric("Lambda Cols", lambda_cols_dynamic, step=epoch)
-        mlflow.log_metric("Lambda Clf", lambda_clf_dynamic, step=epoch)
 
         if epoch % 5 == 0:
           print(f"Epoch [{epoch+1}/{max_epoch}]")

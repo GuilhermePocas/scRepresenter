@@ -6,7 +6,6 @@ import faulthandler
 faulthandler.enable()
 from sklearn.model_selection import train_test_split
 from .scgpt import run_scGPT
-import mlflow
 import pickle
 
 
@@ -15,16 +14,12 @@ def train_scnet(obj, dir, cfg):
     obj_scNET = obj.copy()
     obj_scNET.raw = obj_scNET
 
-    with mlflow.start_run(run_name="scNET"):
-        mlflow.log_param("model", "scNET")
-        mlflow.log_param("epochs", cfg["max_epoch"])
-        mlflow.log_param("model_name", cfg["model_name"])
         
-        scNET_dir = dir + "/scNET"
-        os.makedirs(scNET_dir, exist_ok=True)
-        run_scNET(cfg["annotation_file"], obj_scNET, scNET_dir ,pre_processing_flag=cfg["pre_processing_flag"], human_flag=cfg["human_flag"],
-                         number_of_batches=cfg["number_of_batches"], split_cells=cfg["split_cells"], max_epoch=cfg["max_epoch"],
-                         model_name = cfg["model_name"], clf_loss=cfg["clf_loss"])
+    scNET_dir = dir + "/scNET"
+    os.makedirs(scNET_dir, exist_ok=True)
+    run_scNET(cfg["annotation_file"], obj_scNET, scNET_dir ,pre_processing_flag=cfg["pre_processing_flag"], human_flag=cfg["human_flag"],
+                        number_of_batches=cfg["number_of_batches"], split_cells=cfg["split_cells"], max_epoch=cfg["max_epoch"],
+                        model_name = cfg["model_name"], clf_loss=cfg["clf_loss"])
 
     embedded_genes, embedded_cells, node_features , out_features, ids =  load_embeddings(cfg["model_name"], scNET_dir)
     recon_obj = create_reconstructed_obj(node_features, out_features, obj_scNET)
@@ -59,14 +54,9 @@ def train_scgpt(obj, dir, cfg):
     obj_scGPT_test.obs["batch_id"] = obj_scGPT_test.obs["str_batch"] = "1"
     obj_scGPT = obj_scGPT_train.concatenate(obj_scGPT_test, batch_key="str_batch")
 
-    with mlflow.start_run(run_name="scGPT"):
-        mlflow.log_param("model", "scGPT")
-        for k, v in cfg.items():
-            mlflow.log_param(k, v)
-
-        scGPT_dir = dir + "/scGPT"
-        os.makedirs(scGPT_dir, exist_ok=True)
-        run_scGPT(cfg["model_name"], cfg ,obj_scGPT, scGPT_dir)
+    scGPT_dir = dir + "/scGPT"
+    os.makedirs(scGPT_dir, exist_ok=True)
+    run_scGPT(cfg["model_name"], cfg ,obj_scGPT, scGPT_dir)
 
     with open(scGPT_dir + "/test_cell_embeddings.pkl", "rb") as f:
         test_cell_embeddings = pickle.load(f)

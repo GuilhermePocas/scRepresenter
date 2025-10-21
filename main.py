@@ -3,7 +3,6 @@ import argparse
 import faulthandler
 import scanpy as sc
 from src.main import run_scBLOOM
-import mlflow
 from test_embeddings import test_embeddings
 
 faulthandler.enable()
@@ -37,9 +36,6 @@ def main():
     SAVE_DIR = "output/" + args.model_name
     os.makedirs(SAVE_DIR, exist_ok=True)
 
-    # --- Set up MLflow ---
-    mlflow.set_experiment(args.model_name)
-
     # --- load data ---
     file = "./data/pbmc3k/pbmc3k_raw.h5ad"
     processed_file = "./data/pbmc3k/pbmc3k_processed.h5ad"
@@ -52,21 +48,19 @@ def main():
     os.makedirs(results_dir, exist_ok=True)
 
     #### CLASSICATION TESTS #####
-    with mlflow.start_run(run_name="Combined"):
-        mlflow.log_param("model", "Combined")
-        if args.scnet_epochs > 0:
-            print("Testing scNET")
-            test_embeddings(common_scnet_embs, common_labels, 'scNET',results_dir)
-        
-        if args.scgpt_epochs > 0:
-            print("Testing scGPT")
-            test_embeddings(common_scgpt_embs, common_labels, 'scGPT', results_dir)
+    if args.scnet_epochs > 0:
+        print("Testing scNET")
+        test_embeddings(common_scnet_embs, common_labels, 'scNET',results_dir)
+    
+    if args.scgpt_epochs > 0:
+        print("Testing scGPT")
+        test_embeddings(common_scgpt_embs, common_labels, 'scGPT', results_dir)
 
-        if args.scnet_epochs > 0 and args.scgpt_epochs > 0:
-            print("Testing scBLOOM Avg")
-            test_embeddings(avg_combined_embs, common_labels, "avg", results_dir)
-            print("Testing scBLOOM Conq")
-            test_embeddings(conq_combined_embs, common_labels, 'conq', results_dir)
+    if args.scnet_epochs > 0 and args.scgpt_epochs > 0:
+        print("Testing scBLOOM Avg")
+        test_embeddings(avg_combined_embs, common_labels, "avg", results_dir)
+        print("Testing scBLOOM Conq")
+        test_embeddings(conq_combined_embs, common_labels, 'conq', results_dir)
 
 
     print("Finished all tasks successfully!!")

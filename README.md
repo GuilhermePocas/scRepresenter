@@ -15,7 +15,7 @@ The workflow employs two methods for this purpose, the biological knowledge inte
 ### **1. Setting up**
 To clone the repository, use the following command:
 ```
-git clone https://github.com/your-username/scBLOOM.git
+git clone https://github.com/GuilhermePocas/scBLOOM.git
 ```
 
 The required packages can ben instaled trough the use of the ``` requirements.txt ``` file located at ```./Docs ```. Python 10.16** is recommended.

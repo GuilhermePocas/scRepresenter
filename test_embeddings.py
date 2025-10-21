@@ -13,7 +13,6 @@ import os
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
 import seaborn as sns
-import mlflow
 
 
 Methods_dic={
@@ -162,12 +161,6 @@ def test_embeddings( cell_embeddings, labels, method, save_dir):
         print(f"Mean Recall: {np.mean(fold_recalls):.4f} ± {np.std(fold_recalls):.4f}")
         print(f"Mean F1-Score: {np.mean(fold_f1s):.4f} ± {np.std(fold_f1s):.4f}")
         sys.stdout = sys_stdout_backup
-
-        mlflow.log_metric(f"{method} - Classification Loss", np.mean(fold_losses))
-        mlflow.log_metric(f"{method} - Classification Accuracy ", np.mean(fold_accuracies))
-        mlflow.log_metric(f"{method} - Classification Precision", np.mean(fold_precisions))
-        mlflow.log_metric(f"{method} - Classification Recall", np.mean(fold_recalls))
-        mlflow.log_metric(f"{method} - Classification F1-Score", np.mean(fold_f1s))
 
         true_labels_decoded = label_encoder.inverse_transform(np.array(all_y_true))
         pred_labels_decoded = label_encoder.inverse_transform(np.array(all_y_pred))

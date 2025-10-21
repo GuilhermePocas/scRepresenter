@@ -40,7 +40,6 @@ import scanpy as sc
 import scvi
 import seaborn as sns
 import numpy as np
-import wandb
 from scipy.sparse import issparse
 import matplotlib.pyplot as plt
 from torch import nn
@@ -66,7 +65,6 @@ from .preprocess import Preprocessor
 from . import SubsetsBatchSampler
 from .utils import set_seed, category_str2int, eval_scib_metrics
 import umap
-import mlflow
 
 sc.set_figure_params(figsize=(6, 6))
 os.environ["KMP_WARNINGS"] = "off"
@@ -773,8 +771,6 @@ def run_scGPT(model_name, hyperparameter_defaults, adata, save_dir):
                     loss_adv_E.backward()
                     optimizer_E.step()
 
-            for metric_name, metric_value in metrics_to_log.items():
-                mlflow.log_metric(metric_name, metric_value, step=global_step)
             
             global_step += 1
 
@@ -918,9 +914,6 @@ def run_scGPT(model_name, hyperparameter_defaults, adata, save_dir):
             "valid/sum_mse_dab": (total_loss + dab_weight * total_dab) / total_num,
         }
 
-        # Log each metric separately
-        for metric_name, metric_value in valid_metrics.items():
-            mlflow.log_metric(metric_name, metric_value, step=epoch)
 
         if return_raw:
             return np.concatenate(predictions, axis=0), embeddings_dic, cls_dic
@@ -1109,8 +1102,6 @@ def run_scGPT(model_name, hyperparameter_defaults, adata, save_dir):
 
     with open(save_dir / "train_cls_output.pkl", "wb+") as f:
         pickle.dump(train_cls, f)
-
-    mlflow.log_metrics(results)
 
 
     # In[ ]:
