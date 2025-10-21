@@ -18,31 +18,27 @@ To clone the repository, use the following command:
 git clone https://github.com/GuilhermePocas/scBLOOM.git
 ```
 
-The required packages can ben instaled trough the use of the ``` requirements.txt ``` file located at ```./Docs ```. Python 10.16** is recommended.
+The required packages can be installed in a docker enviroment, with two Dockerfiles available depending on the availability of the GPU.
 
-A dockerfile for the required enviroment is also provided, but GPU access ir required.
+If there is a GPU available, which is recommended, then run the following commands:
+
+```
+docker build -f Dockerfile.gpu -t env .
+docker run -it --rm -v $(pwd)/output:/app/output env bash
+```
+
+If there is no GPU available, run the following command:
+```
+docker build -f Dockerfile.cpu -t env .
+docker run -it --rm -v $(pwd)/output:/app/output env bash
+```
+
 
 ##  API
 
-### Networks
-
-scNET utilizes a gene similarity graph based in PPI information. In ``` ./networks ``` this graph is presented, as well as three others constructed from our own methods. 
-
-These can be found in the corresponding directories, and in order to run them the corresponding knowledge sources must be downloaded from https://drive.google.com/drive/folders/1SpUsp_cXh0XQnM12uLZuCPDFjTMUTIc8?usp=drive_link and placed in ``` ./knowledge sources ```. Then, to run the network creation methods simply run the following command:
-
-``` 
-python create_METHOD_graph.py --top_p 100 --var_genes 2000
-```
-
-Whith the following args:
-
-- **top_p(int)**: the number of pairs to consider for each gene, higher number might generate really large graphs.
-
-- **var_genes(int)**: the number of highly variable genes to be selected.
-
 ### scBLOOM
 
-To run the scBLOOM pipeline, first load a scRNAseq dataset using Scanpy, and then choose the appropriate scGPT model checkpoint and place it in ```/src/scgpt/checkpoints```. Then, run the following function:
+To run the scBLOOM pipeline, first load a scRNAseq dataset using Scanpy, and then choose the appropriate scGPT model checkpoint from https://github.com/bowang-lab/scGPT/tree/main#pretrained-scGPT-checkpoints, and place it in ```./src/scgpt/checkpoints```. Then, run the following function:
 
 ```
 scnet_embs, scgpt_embs, avg_embs, conq_embs, labels = run_scBLOOM(model_name, data, network, dir, scnet_epochs, scgpt_epochs)
@@ -74,8 +70,29 @@ The resulting output objects are:
 
 - **labels**: the cell type labels, in the same order as the embeddings.
 
-An example script is provided in ```/main.py```, using the pbmc3k dataset from Scanpy, and the human scGPT model checkpoint, available here https://drive.google.com/drive/folders/1kKtYwhCkcxgtKDAPb_-Os0dSBvfJbEAQ?usp=drive_link. To run the example simply run the following command:
+An example script is provided in ```/main.py```, using the pbmc3k dataset from Scanpy, and the human scGPT model checkpoint. To run the example, start the docker enviroment as previously explained, and run the following command:
 
 ```
 python main.py --model_name test --network PPI.csv --scnet_epochs 800 --scgpt_epochs 60
 ```
+
+### Networks
+
+scBLOOM utilizes a gene similarity graph to run the scNET model. Four pre-made graphs can already be found in ``` ./src/networks ```, constructed from GO annotations, Protein-Protein Interactions and Transcription Factor proteins. 
+
+To build custom gene similarity graphs (barring the PPI graph), use the methods found in ``` ./src/networks ```. 
+
+For the GO-based methods, a GO annotations file is required, found in the GO archive https://release.geneontology.org/. The human file was used, ````goa_human.gaf```, from version 2025-02-06.
+For the Transcription Factors method, the full interaction table of the TFLink database was used, found in https://tflink.net/download/. The small and large-scale full interaction table was used for the human organism. Both of these files need to be placed in ``` ./src/networks/knowledge sources ``` to run the corresponding methods, which can be done with the following command:
+
+``` 
+python create_METHOD_graph.py --top_p 100 --var_genes 2000
+```
+
+Whith the following args:
+
+- **top_p(int)**: the number of pairs to consider for each gene, higher number might generate really large graphs.
+
+- **var_genes(int)**: the number of highly variable genes to be selected.
+
+

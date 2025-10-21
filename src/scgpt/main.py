@@ -538,7 +538,7 @@ def run_scGPT(model_name, hyperparameter_defaults, adata, save_dir):
         except:
             # only load params that are in the model and match the size
             model_dict = model.state_dict()
-            pretrained_dict = torch.load(model_file)
+            pretrained_dict = torch.load(model_file, map_location=device)
             pretrained_dict = {
                 k: v
                 for k, v in pretrained_dict.items()

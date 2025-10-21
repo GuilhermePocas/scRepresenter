@@ -1,5 +1,5 @@
 # Install system dependencies early
-FROM pytorch/pytorch:1.13.0-cuda11.6-cudnn8-runtime
+FROM python:3.9.12-slim
 #FROM pytorch/pytorch:1.13.0-cpu
 
 ENV DEBIAN_FRONTEND=noninteractive
