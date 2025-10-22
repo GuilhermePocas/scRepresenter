@@ -24,7 +24,7 @@ If there is a GPU available, which is recommended, then run the following comman
 
 ```
 docker build -f Dockerfile.gpu -t env .
-docker run -it --rm -v $(pwd)/output:/app/output env bash
+docker run -it --gpus all --rm -v $(pwd)/output:/app/output env bash
 ```
 
 If there is no GPU available, run the following command:
