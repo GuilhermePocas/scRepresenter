@@ -32,38 +32,38 @@ def train_scnet(obj, dir, cfg):
 
 def train_scgpt(obj, dir, cfg):
 
-    obj = obj.copy()
+    obj_scGPT = obj.copy()
 
-    obj.var_names = obj.var_names.str.upper()
-    sc.pp.normalize_total(obj, target_sum=1e4)
-    sc.pp.log1p(obj)
-    sc.pp.highly_variable_genes(obj, n_top_genes=2000)
-    obj = obj[:, obj.var['highly_variable']].copy()
+    obj_scGPT.var_names = obj_scGPT.var_names.str.upper()
+    sc.pp.normalize_total(obj_scGPT, target_sum=1e4)
+    sc.pp.log1p(obj_scGPT)
+    sc.pp.highly_variable_genes(obj_scGPT, n_top_genes=2000)
+    obj_scGPT = obj_scGPT[:, obj_scGPT.var['highly_variable']].copy()
     
     train_idx, test_idx = train_test_split(
-        obj.obs_names,
+        obj_scGPT.obs_names,
         test_size=0.2,
         stratify=obj.obs["celltype"],  # Ensure class balance
         random_state=42
     )
 
-    obj_scGPT_test = obj[test_idx].copy()
-    obj_scGPT_train = obj[train_idx].copy()
+    obj_scGPT_test = obj_scGPT[test_idx].copy()
+    obj_scGPT_train = obj_scGPT[train_idx].copy()
 
     obj_scGPT_train.obs["batch_id"] = obj_scGPT_train.obs["str_batch"] = "0"
     obj_scGPT_test.obs["batch_id"] = obj_scGPT_test.obs["str_batch"] = "1"
-    obj_scGPT = obj_scGPT_train.concatenate(obj_scGPT_test, batch_key="str_batch")
+    obj_scGPT_batch = obj_scGPT_train.concatenate(obj_scGPT_test, batch_key="str_batch")
 
     scGPT_dir = dir + "/scGPT"
     os.makedirs(scGPT_dir, exist_ok=True)
-    run_scGPT(cfg["model_name"], cfg ,obj_scGPT, scGPT_dir)
+    run_scGPT(cfg["model_name"], cfg ,obj_scGPT_batch, scGPT_dir)
 
     with open(scGPT_dir + "/test_cell_embeddings.pkl", "rb") as f:
         test_cell_embeddings = pickle.load(f)
     scgpt_cell_embeddings = pd.DataFrame.from_dict(test_cell_embeddings, orient="index")
     scgpt_cell_embeddings.index.name = "cell_id"
 
-    scgpt_labels = obj_scGPT.obs.loc[scgpt_cell_embeddings.index, "celltype"].values
+    scgpt_labels = obj_scGPT_batch.obs.loc[scgpt_cell_embeddings.index, "celltype"].values
     scgpt_cell_embeddings.index = scgpt_cell_embeddings.index.str.replace(r"-[01]$", "", regex=True)
 
     return scgpt_cell_embeddings, scgpt_labels
