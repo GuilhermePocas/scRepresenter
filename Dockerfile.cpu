@@ -1,5 +1,5 @@
 # Use the official PyTorch CPU runtime image
-FROM pytorch/pytorch:1.13.0-cpu
+FROM python:3.9.12-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
 

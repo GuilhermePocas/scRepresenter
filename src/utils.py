@@ -42,7 +42,7 @@ def train_scgpt(obj, dir, cfg):
     
     train_idx, test_idx = train_test_split(
         obj.obs_names,
-        test_size=0.4,
+        test_size=0.2,
         stratify=obj.obs["celltype"],  # Ensure class balance
         random_state=42
     )
