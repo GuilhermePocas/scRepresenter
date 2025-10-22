@@ -1,4 +1,8 @@
 import os
+os.environ['NUMBA_CACHE_DIR'] = '/tmp/numba_cache'
+os.environ['MPLCONFIGDIR'] = '/tmp/matplotlib_config'
+os.makedirs('/tmp/numba_cache', exist_ok=True)
+os.makedirs('/tmp/matplotlib_config', exist_ok=True)
 import argparse
 import faulthandler
 import scanpy as sc
