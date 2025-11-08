@@ -1,5 +1,5 @@
 # Install system dependencies early
-FROM python:3.9.12-slim
+FROM pytorch/pytorch:1.13.0-cuda11.6-cudnn8-runtime
 #FROM pytorch/pytorch:1.13.0-cpu
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -29,6 +29,7 @@ COPY requirements.txt requirements.txt
 RUN pip install --upgrade pip setuptools packaging && \
     pip install -r requirements.txt
 
+RUN pip install flash-attn==1.0.7 --no-build-isolation
 
 # Copy rest of the code last (changing it doesn't bust earlier caches)
 COPY . /app
