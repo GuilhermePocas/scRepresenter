@@ -65,6 +65,7 @@ from .preprocess import Preprocessor
 from . import SubsetsBatchSampler
 from .utils import set_seed, category_str2int, eval_scib_metrics
 import umap
+import gdown
 
 sc.set_figure_params(figsize=(6, 6))
 os.environ["KMP_WARNINGS"] = "off"
@@ -187,6 +188,16 @@ def run_scGPT(model_name, hyperparameter_defaults, adata, save_dir):
 
     if config["load_model"] is not None:
         model_dir = Path(config["load_model"])
+
+        if not model_dir.exists():
+            print(f"Model directory {model_dir} not found. Downloading...")
+
+            drive_folder_url = "https://drive.google.com/drive/folders/1lcSPTGSmIgHQGhuTQCd2xQMHyJvRf5Sy?usp=drive_link"
+            model_dir.mkdir(parents=True, exist_ok=True)
+            gdown.download_folder(url=drive_folder_url, output=str(model_dir), quiet=False, use_cookies=False)
+
+            print(f"Download complete. Files saved to: {model_dir}")
+
         model_config_file = model_dir / "args.json"
         model_file = model_dir / "best_model.pt"
         vocab_file = model_dir / "vocab.json"

@@ -38,7 +38,7 @@ docker run -it --rm -v $(pwd)/output:/app/output env bash
 
 ### scBLOOM
 
-To run the scBLOOM pipeline, first load a scRNAseq dataset using Scanpy, and then choose the appropriate scGPT model checkpoint from https://github.com/bowang-lab/scGPT/tree/main#pretrained-scGPT-checkpoints, and place it in ```./src/scgpt/checkpoints```. Then, run the following function:
+To run the scBLOOM pipeline, first load a scRNAseq dataset using Scanpy. The pipeline automatically downloads the Human scGPT checkpoint, in order to use another organ checkpoint from https://github.com/bowang-lab/scGPT/tree/main#pretrained-scGPT-checkpoints download it and place it in ```./src/scgpt/checkpoints```. Then, run the following function:
 
 ```
 scnet_embs, scgpt_embs, avg_embs, conq_embs, labels = run_scBLOOM(model_name, data, network, dir, scnet_epochs, scgpt_epochs)
@@ -75,6 +75,16 @@ An example script is provided in ```/main.py```, using the pbmc3k dataset from S
 ```
 python main.py --model_name test --network PPI.csv --scnet_epochs 800 --scgpt_epochs 60
 ```
+
+with the following args:
+
+- **model_name(str)**: the name of the current run.
+
+- **network**: the name of the gene similarity network to be used in this run. They can be found ```./src/networks``` 
+
+- **scnet_epochs**: the number of training steps scNET will run for. If its 0 this model is skipped.
+
+- **scgpt_epochs**: the number of training steps scGPT will run for. If its 0 this model is skipped.
 
 ### Networks
 
