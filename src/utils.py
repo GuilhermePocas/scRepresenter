@@ -68,9 +68,10 @@ def train_scgpt(obj, dir, cfg):
 
     return scgpt_cell_embeddings, scgpt_labels
 
-def combine_embeddings(obj, scnet_emb, scgpt_emb):
+def combine_embeddings(obj, scnet_emb, scgpt_emb, dir):
 
     common_test_idx = scgpt_emb.index.intersection(scnet_emb.index)
+    obj_common = obj[common_test_idx].copy()
     print(f"Test cells in common: {len(common_test_idx)} / {len(scgpt_emb.index)}")
 
     # Subset to only common cells
@@ -83,17 +84,14 @@ def combine_embeddings(obj, scnet_emb, scgpt_emb):
     avg_combined_embs = pd.DataFrame((common_scgpt_embs.values + common_scnet_embs.values) / 2, index=common_test_idx)
     conq_combined_embs = pd.concat([common_scgpt_embs, common_scnet_embs], axis=1)
 
+    obj_common.X = obj_common.X.toarray()
+    obj_common.obsm["X_scnet"] = common_scnet_embs.values
+    obj_common.obsm["X_scgpt"] = common_scgpt_embs.values
+    obj_common.obsm["X_combined_avg"] = avg_combined_embs.values
+    obj_common.obsm["X_combined_conc"] = conq_combined_embs.values
+    obj_common.write(dir + "/scBLOOM" + "/Embs.h5ad")
+
     return common_scnet_embs, common_scgpt_embs, avg_combined_embs, conq_combined_embs, common_labels
 
-def write_embeddings(avg_embeddings, conq_embeddings, dir):
-
-    scBLOOM_dir = dir + "/scBLOOM"
-    os.makedirs(scBLOOM_dir, exist_ok=True)
-
-    with open(scBLOOM_dir + '/cell_embeddings_avg.pkl', 'wb') as f:
-        pickle.dump(avg_embeddings, f, pickle.HIGHEST_PROTOCOL)
-
-    with open(scBLOOM_dir + '/cell_embeddings_conq.pkl', 'wb') as f:
-        pickle.dump(conq_embeddings, f, pickle.HIGHEST_PROTOCOL)
 
 

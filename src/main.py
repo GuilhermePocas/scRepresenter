@@ -2,7 +2,7 @@ import os
 import argparse
 import faulthandler
 import torch
-from .utils import train_scnet, train_scgpt, combine_embeddings, write_embeddings
+from .utils import train_scnet, train_scgpt, combine_embeddings
 
 
 def run_scBLOOM(model_name, obj, network, results_dir, scnet_epochs=0, scgpt_epochs=0):
@@ -69,8 +69,8 @@ def run_scBLOOM(model_name, obj, network, results_dir, scnet_epochs=0, scgpt_epo
     if scnet_epochs > 0 and scgpt_epochs > 0:
 
         common_scnet_embs, common_scgpt_embs, avg_combined_embs, conq_combined_embs, common_labels = \
-        combine_embeddings(obj, scnet_cell_embeddings, scgpt_cell_embeddings)
-        write_embeddings(avg_combined_embs, conq_combined_embs, results_dir)
+        combine_embeddings(obj, scnet_cell_embeddings, scgpt_cell_embeddings, results_dir)
+        
 
         return common_scnet_embs, common_scgpt_embs, avg_combined_embs, conq_combined_embs, common_labels
     

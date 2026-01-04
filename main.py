@@ -16,8 +16,8 @@ def parse_args():
     parser = argparse.ArgumentParser(description="Run scNET with custom parameters.")
     parser.add_argument("--model_name", type=str, required=True, help="Name of the model")
     parser.add_argument("--network", type=str, required=True, help="Dataset used")
-    parser.add_argument("--scnet_epochs", type=int, help="Number of training epochs", default=0)
-    parser.add_argument("--scgpt_epochs", type=int, help="Number of training epochs", default=0)
+    parser.add_argument("--scnet_epochs", type=int, help="Number of training epochs", default=1)
+    parser.add_argument("--scgpt_epochs", type=int, help="Number of training epochs", default=1)
 
     return parser.parse_args()
 

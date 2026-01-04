@@ -1055,6 +1055,18 @@ def run_scGPT(model_name, hyperparameter_defaults, adata, save_dir):
             return_raw=True,
         )
 
+        # Retrieve the data-independent gene embeddings from scGPT
+        gene2idx = vocab.get_stoi()
+        final_gene_ids = np.array([id for id in gene2idx.values()])
+        gene_embeddings = model.encoder(torch.tensor(final_gene_ids, dtype=torch.long).to(device))
+        gene_embeddings = gene_embeddings.detach().cpu().numpy()
+        # Filter on the intersection between the Immune Human HVGs found in step 1.2 and scGPT's 30+K foundation model vocab
+        gene_embeddings = {gene: gene_embeddings[i] for i, gene in enumerate(gene2idx.keys()) if gene in adata.var.index.tolist()}
+        print('Retrieved gene embeddings for {} genes.'.format(len(gene_embeddings)))
+        
+        with open(save_dir / "gene_embeddings.pkl", "wb+") as f:
+            pickle.dump(gene_embeddings, f)
+
         # compute accuracy, precision, recall, f1
         from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
