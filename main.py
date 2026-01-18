@@ -36,15 +36,14 @@ def load_dataset(file, processed_file):
 def main():
     args = parse_args()
 
-    # --- Set up directories ---
     SAVE_DIR = "output/" + args.model_name
     os.makedirs(SAVE_DIR, exist_ok=True)
 
-    # --- load data ---
     file = "./data/pbmc3k/pbmc3k_raw.h5ad"
     processed_file = "./data/pbmc3k/pbmc3k_processed.h5ad"
     obj = load_dataset(file, processed_file)
 
+    # Run the pipeline
     common_scnet_embs, common_scgpt_embs, avg_combined_embs, conq_combined_embs, common_labels = \
         run_scBLOOM(args.model_name, obj, args.network, SAVE_DIR, args.scnet_epochs, args.scgpt_epochs)
     
