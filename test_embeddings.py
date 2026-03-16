@@ -19,7 +19,7 @@ Methods_dic={
     'scNET' : (15, 'Blues'),
     'scGPT' : (5, 'Oranges'),
     'avg' : (8, 'Reds'),
-    'conq' : (5, 'Reds')
+    'conc' : (5, 'Reds')
 }
 
 class Classifier(nn.Module):
@@ -73,7 +73,7 @@ def test_embeddings( cell_embeddings, labels, method, save_dir):
             X_train = scaler.fit_transform(X_train)
             X_test = scaler.transform(X_test)
 
-            if method == "conq":
+            if method == "conc":
                 pca = PCA(n_components=512)
                 pca.fit(X_train)
                 X_train = pca.transform(X_train)

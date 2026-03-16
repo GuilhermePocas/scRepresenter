@@ -89,7 +89,10 @@ def combine_embeddings(obj, scnet_emb, scgpt_emb, dir):
     obj_common.obsm["X_scgpt"] = common_scgpt_embs.values
     obj_common.obsm["X_combined_avg"] = avg_combined_embs.values
     obj_common.obsm["X_combined_conc"] = conq_combined_embs.values
-    obj_common.write(dir + "/scBLOOM" + "/Embs.h5ad")
+
+    scRepresenter_dir = dir + "/scRepresenter"
+    os.makedirs(scRepresenter_dir, exist_ok=True)
+    obj_common.write(scRepresenter_dir + "/Embs.h5ad")
 
     return common_scnet_embs, common_scgpt_embs, avg_combined_embs, conq_combined_embs, common_labels
 

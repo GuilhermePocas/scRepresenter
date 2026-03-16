@@ -26,8 +26,9 @@ ENV R_HOME=/usr/lib/R
 
 # Install Python deps early so they're cached
 COPY requirements.txt requirements.txt
-RUN pip install --upgrade pip setuptools packaging && \
-    pip install -r requirements.txt
+RUN pip install --upgrade pip setuptools packaging 
+RUN pip install uv && \
+    uv pip install --system -r requirements.txt
 
 RUN pip install flash-attn==1.0.7 --no-build-isolation
 

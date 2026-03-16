@@ -60,10 +60,10 @@ def main():
         test_embeddings(common_scgpt_embs, common_labels, 'scGPT', results_dir)
 
     if args.scnet_epochs > 0 and args.scgpt_epochs > 0:
-        print("Testing scBLOOM Avg")
+        print("Testing scRepresenter Avg")
         test_embeddings(avg_combined_embs, common_labels, "avg", results_dir)
-        print("Testing scBLOOM Conq")
-        test_embeddings(conq_combined_embs, common_labels, 'conq', results_dir)
+        print("Testing scRepresenter Conc")
+        test_embeddings(conq_combined_embs, common_labels, 'conc', results_dir)
 
 
     print("Finished all tasks successfully!!")

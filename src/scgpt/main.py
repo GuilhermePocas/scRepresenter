@@ -468,11 +468,9 @@ def run_scGPT(model_name, hyperparameter_defaults, adata, save_dir):
         batch_size: int,
         shuffle: bool = False,
         intra_domain_shuffle: bool = False,
-        drop_last: bool = False,
-        num_workers: int = 0,
+        drop_last: bool = False
     ) -> DataLoader:
-        if num_workers == 0:
-            num_workers = min(len(os.sched_getaffinity(0)), batch_size // 2)
+        num_workers = min(len(os.sched_getaffinity(0)), batch_size // 2, 4)
 
         dataset = SeqDataset(data_pt)
 
@@ -1043,7 +1041,7 @@ def run_scGPT(model_name, hyperparameter_defaults, adata, save_dir):
             batch_size=eval_batch_size,
             shuffle=False,
             drop_last=False,
-            num_workers=min(len(os.sched_getaffinity(0)), eval_batch_size // 2),
+            num_workers = min(len(os.sched_getaffinity(0)), batch_size // 2, 4),
             pin_memory=True,
         )
 
