@@ -5,7 +5,7 @@
 
 ![scRepresenter Overview](docs/methodology.png)
 
-**scRepresenter** (single-cell Biologically-enhanced Learning from Ontologies and Omics-based Models) is a computational workflow geared towards cell type classification, with a particular focus on accuratly predicting rare cell types. It achieves this by bridging large-scale, expression-only Foundation Models, known for their accurate predictions, with domain-specific biological knowledge drawn from large graphs of relevant information.
+**scRepresenter** is a computational workflow geared towards cell type classification, with a particular focus on accuratly predicting rare cell types. It achieves this by bridging large-scale, expression-only Foundation Models, known for their accurate predictions, with domain-specific biological knowledge drawn from large graphs of relevant information.
 
 The workflow employs two methods for this purpose, the biological knowledge integration method [scNET, 2025](https://github.com/madilabcode/scNET), and the Foundation Model [scGPT, 2024](https://github.com/bowang-lab/scGPT).
 
