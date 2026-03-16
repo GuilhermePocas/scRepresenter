@@ -5,7 +5,7 @@ import torch
 from .utils import train_scnet, train_scgpt, combine_embeddings
 
 
-def run_scBLOOM(model_name, obj, network, results_dir, scnet_epochs=0, scgpt_epochs=0):
+def run_scRepresenter(model_name, obj, network, results_dir, scnet_epochs=0, scgpt_epochs=0):
 
     # --- Set up directories ---
     ANN_FILE = "../networks/" + network

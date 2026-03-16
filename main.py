@@ -6,7 +6,7 @@ os.makedirs('/tmp/matplotlib_config', exist_ok=True)
 import argparse
 import faulthandler
 import scanpy as sc
-from src.main import run_scBLOOM
+from src.main import run_scRepresenter
 from test_embeddings import test_embeddings
 
 faulthandler.enable()
@@ -45,7 +45,7 @@ def main():
 
     # Run the pipeline
     common_scnet_embs, common_scgpt_embs, avg_combined_embs, conq_combined_embs, common_labels = \
-        run_scBLOOM(args.model_name, obj, args.network, SAVE_DIR, args.scnet_epochs, args.scgpt_epochs)
+        run_scRepresenter(args.model_name, obj, args.network, SAVE_DIR, args.scnet_epochs, args.scgpt_epochs)
     
     results_dir = SAVE_DIR + "/results"
     os.makedirs(results_dir, exist_ok=True)

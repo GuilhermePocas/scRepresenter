@@ -1,11 +1,11 @@
 
-# scBLOOM: Improving Cell Type Classification by Bridging Single-cell Expression and Biological Knowledge
+# scRepresenter: Improving Cell Type Classification by Bridging Single-cell Expression and Biological Knowledge
 
 ## Overview
 
-![scBLOOM Overview](docs/methodology.png)
+![scRepresenter Overview](docs/methodology.png)
 
-**scBLOOM** (single-cell Biologically-enhanced Learning from Ontologies and Omics-based Models) is a computational workflow geared towards cell type classification, with a particular focus on accuratly predicting rare cell types. It achieves this by bridging large-scale, expression-only Foundation Models, known for their accurate predictions, with domain-specific biological knowledge drawn from large graphs of relevant information.
+**scRepresenter** (single-cell Biologically-enhanced Learning from Ontologies and Omics-based Models) is a computational workflow geared towards cell type classification, with a particular focus on accuratly predicting rare cell types. It achieves this by bridging large-scale, expression-only Foundation Models, known for their accurate predictions, with domain-specific biological knowledge drawn from large graphs of relevant information.
 
 The workflow employs two methods for this purpose, the biological knowledge integration method [scNET, 2025](https://github.com/madilabcode/scNET), and the Foundation Model [scGPT, 2024](https://github.com/bowang-lab/scGPT).
 
@@ -15,7 +15,7 @@ The workflow employs two methods for this purpose, the biological knowledge inte
 ### **1. Setting up**
 To clone the repository, use the following command:
 ```
-git clone https://github.com/GuilhermePocas/scBLOOM.git
+git clone https://github.com/GuilhermePocas/scRepresenter.git
 ```
 
 The required packages can be installed in a docker enviroment, with two Dockerfiles available depending on the availability of the GPU.
@@ -36,12 +36,12 @@ docker run -it --rm -v $(pwd)/output:/app/output env bash
 
 ##  API
 
-### scBLOOM
+### scRepresenter
 
-To run the scBLOOM pipeline, first load a scRNAseq dataset using Scanpy. The pipeline automatically downloads the Human scGPT checkpoint, in order to use another organ checkpoint from https://github.com/bowang-lab/scGPT/tree/main#pretrained-scGPT-checkpoints download it and place it in ```./src/scgpt/checkpoints```. Then, run the following function:
+To run the scRepresenter pipeline, first load a scRNAseq dataset using Scanpy. The pipeline automatically downloads the Human scGPT checkpoint, in order to use another organ checkpoint from https://github.com/bowang-lab/scGPT/tree/main#pretrained-scGPT-checkpoints download it and place it in ```./src/scgpt/checkpoints```. Then, run the following function:
 
 ```
-scnet_embs, scgpt_embs, avg_embs, conq_embs, labels = run_scBLOOM(model_name, data, network, dir, scnet_epochs, scgpt_epochs)
+scnet_embs, scgpt_embs, avg_embs, conq_embs, labels = run_scRepresenter(model_name, data, network, dir, scnet_epochs, scgpt_epochs)
 ```
 
 with the following args:
@@ -64,9 +64,9 @@ The resulting output objects are:
 
 - **scgpt_embs**: the embeddings from the scGPT model.
 
-- **avg_embs**: the scBLOOM embeddings with the average aggregation strategy.
+- **avg_embs**: the scRepresenter embeddings with the average aggregation strategy.
 
-- **conq_embs**: the scBLOOM embeddings with the concatenation aggregation strategy.
+- **conq_embs**: the scRepresenter embeddings with the concatenation aggregation strategy.
 
 - **labels**: the cell type labels, in the same order as the embeddings.
 
@@ -88,7 +88,7 @@ with the following args:
 
 ### Networks
 
-scBLOOM utilizes a gene similarity graph to run the scNET model. Four pre-made graphs can already be found in ``` ./src/networks ```, constructed from GO annotations, Protein-Protein Interactions and Transcription Factor proteins. 
+scRepresenter utilizes a gene similarity graph to run the scNET model. Four pre-made graphs can already be found in ``` ./src/networks ```, constructed from GO annotations, Protein-Protein Interactions and Transcription Factor proteins. 
 
 To build custom gene similarity graphs (barring the PPI graph), use the methods found in ``` ./src/networks ```. 
 
