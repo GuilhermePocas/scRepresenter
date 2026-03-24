@@ -1,4 +1,9 @@
 
+# Project Title
+
+A brief description of what this project does and who it's for
+
+
 # scRepresenter: Improving Cell Type Classification by Bridging Single-cell Expression and Biological Knowledge
 
 ## Overview
@@ -34,7 +39,7 @@ docker run -it --rm -v $(pwd)/output:/app/output env bash
 ```
 
 
-##  API
+##  Usage
 
 ### scRepresenter
 
@@ -107,6 +112,16 @@ Whith the following args:
 
 ### Embedding analysis
 
-A shiny application is also provided to analyse the embedding objects produced by scRepresenter, allowing for the viewing of several insights and the creation of different types of plots.
+A shiny application is also provided to better analyse the embedding objects produced by scRepresenter, allowing for the easy viewing of several insights and the creation of different types of plots and graphs. The application can be run locally from a Docker container, starting with building the docker image from the provided Dockerfile in the ```/app``` directory using the following command:
 
-The application can be run locally, 
+```
+docker build -t shiny-app .
+```
+
+Then, by simply running the docker container:
+
+```
+docker run -p 3838:3838 shiny-app
+```
+
+The application can then acessed trough ```http://localhost:3838/``` using your internet browser. Any H5 embedding object produced by the pipeline can be uploaded here, and the specific embeddings described in the scRepresenter paper can be found at https://drive.google.com/file/d/19NVlnrTCTDOW9tHsVgjekZEyGVTTS1wJ/view?usp=sharing.
