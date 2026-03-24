@@ -105,4 +105,8 @@ Whith the following args:
 
 - **var_genes(int)**: the number of highly variable genes to be selected.
 
+### Embedding analysis
 
+A shiny application is also provided to analyse the embedding objects produced by scRepresenter, allowing for the viewing of several insights and the creation of different types of plots.
+
+The application can be run locally, 
