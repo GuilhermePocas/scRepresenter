@@ -1,6 +1,8 @@
 __pycache__/
 venv/
+.venv/
 mlruns/
+.python-version
 
 output/test
 src/scgpt/checkpoints/scGPT_brain
