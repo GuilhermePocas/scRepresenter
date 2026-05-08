@@ -1,10 +1,5 @@
 
-# Project Title
-
-A brief description of what this project does and who it's for
-
-
-# scRepresenter: Improving Cell Type Classification by Bridging Single-cell Expression and Biological Knowledge
+# scRepresenter: a unified framework for computing and benchmarking biologically informed cellular representations in single-cell transcriptional data
 
 ## Overview
 
