@@ -20,7 +20,7 @@ def run_scRepresenter(model_name, obj, network, results_dir, scnet_epochs=0, scg
 
         parameters_scnet = dict(
             annotation_file=ANN_FILE,
-            pre_processing_flag=True,
+            pre_processing_flag=False,
             human_flag=False,
             number_of_batches=1,
             split_cells=True,
