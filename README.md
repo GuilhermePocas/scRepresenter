@@ -44,7 +44,7 @@ pip install -r requirements.txt
 
 ### Data preprocessing
 
-In order to get the best performance, preprocessing the scRNA dataset is highly recommended. See the Preprocessing script for an example.
+In order to get the best performance out of scRepresenter, preprocessing the scRNA dataset is highly recommended. For an example of a preprocessing pipeline, see the [preprocessing example notebook](https://github.com/GuilhermePocas/scRepresenter/blob/main/scripts/Preprocessing.ipynb).
 
 ### Networks
 
