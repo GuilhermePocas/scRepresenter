@@ -31,7 +31,6 @@ df_gaf = df_gaf[df_gaf["Aspect"] == "P"]
 
 #gene expression
 adata = sc.read(expression_file)
-#adata = sc.read_10x_h5(expression_file)
 adata.var_names = adata.var_names.str.upper()
 sc.pp.log1p(adata)
 
@@ -87,7 +86,6 @@ else:
 
 df_edges = df_edges[df_edges["conn"] > 0]
 
-print(df_edges["conn"].value_counts())
 
 # Save to CSV
 df_edges.to_csv("pbmc-GOpairs.csv", index_label="id")

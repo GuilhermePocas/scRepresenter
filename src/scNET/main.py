@@ -312,7 +312,7 @@ def train(data, loader, highly_variable_index, save_dir ,number_of_batches=5 ,
             gc.collect()
             torch.cuda.empty_cache()
 
-        if epoch % 5 == 0:
+        if epoch % 100 == 0:
           print(f"Epoch [{epoch+1}/{max_epoch}]")
           print(f"  Row Loss: {epoch_row_loss/number_of_batches:.4f}")
           print(f"  Column Loss: {epoch_col_loss/number_of_batches:.4f}")

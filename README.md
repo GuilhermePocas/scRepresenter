@@ -44,28 +44,31 @@ pip install -r requirements.txt
 
 ### Data preprocessing
 
-In order to get the best performance out of scRepresenter, preprocessing the scRNA dataset is highly recommended. For an example of a preprocessing pipeline, see the [preprocessing example notebook](https://github.com/GuilhermePocas/scRepresenter/blob/main/scripts/Preprocessing.ipynb).
+In order to get the best performance out of scRepresenter, preprocessing the scRNA dataset is highly recommended. We performed several preprocessing steps, mainly:
+
+- Filtering of low-impact genes;
+- Filtering of unviable cells;
+- Normalization;
+- Log1 transform;
+- Selection of only the high variance genes;
+
+For an example of a preprocessing pipeline, see the [Preprocessing notebook](https://github.com/GuilhermePocas/scRepresenter/blob/main/scripts/Preprocessing.ipynb).
 
 ### Networks
 
-scRepresenter utilizes a gene similarity graph to run the scNET model. Four pre-made graphs can already be found in ``` ./src/networks ``` , constructed from GO annotations, Protein-Protein Interactions and Transcription Factor proteins. 
+scRepresenter utilizes a gene similarity graph to run the scNET model. Four pre-made graphs can already be found in ``` ./src/networks ``` , constructed from GO annotations, Protein-Protein Interactions and Transcription Factor proteins. To build a custom gene similarity graphs (barring the PPI graph), use the methods found in ``` ./src/networks ```. 
 
-To build custom gene similarity graphs (barring the PPI graph), use the methods found in ``` ./src/networks ```. 
-
-For the GO-based methods, a GO annotations file is required, found in the GO archive https://release.geneontology.org/. The human file was used, ```goa_human.gaf```, from version 2025-02-06.
-For the Transcription Factors method, the full interaction table of the TFLink database was used, found in https://tflink.net/download/. The small and large-scale full interaction table was used for the human organism. Both of these files need to be placed in ``` ./src/networks/knowledge sources ``` to run the corresponding methods, which can be done with the following command:
+For the GO-based methods, a GO annotations file is required, found in the GO archive https://release.geneontology.org/. The human file was used, ```goa_human.gaf```, from version 2025-02-06. For the Transcription Factors method, the full interaction table of the TFLink database was used, found in https://tflink.net/download/. The small and large-scale full interaction table was used for the human organism. Both of these files need to be placed in ``` ./src/networks/knowledge sources ``` to run the corresponding methods, which can be done with the following command:
 
 ``` 
 python create_METHOD_graph.py --top_p 100 --var_genes 2000
 ```
 
-Whith the following args:
+With *METHOD* being one of the available network creation methods (GOpairs, GOembs, TFpairs) and with the following arguments:
 
-- **top_p(int)**: the number of pairs to consider for each gene, higher number might generate really large graphs.
+- **top_p(int)**: the number of pairs to consider for each gene, higher numbers might lead to computationally intensive graphs.
 
 - **var_genes(int)**: the number of highly variable genes to be selected.
-
-For detailed steps on how to create each of the similarity graphs, see the Gene Networks script.
 
 ### scRepresenter
 
@@ -101,7 +104,7 @@ The resulting output objects are:
 
 - **labels**: the cell type labels, in the same order as the embeddings.
 
-For a detailed example see the Training script, where scRepresented is trained on the PBMC3k dataset from Scanpy.
+For a detailed example see the Model Training notebook, where scRepresented is trained on the PBMC3k dataset from Scanpy.
 
 <!--An example script is provided in ```/main.py```, using the pbmc3k dataset from Scanpy, and the human scGPT model checkpoint. To run the example, start the docker enviroment as previously explained, and run the following command:
 

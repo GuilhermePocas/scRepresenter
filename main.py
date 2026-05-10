@@ -31,6 +31,11 @@ def load_dataset(file, processed_file):
     obj = obj[obj.obs['celltype'] != "unknown"]
     obj.var_names_make_unique()
 
+    sc.pp.normalize_total(obj, target_sum=1e4)
+    sc.pp.log1p(obj)  
+    sc.pp.highly_variable_genes(obj, n_top_genes=2000)
+    obj = obj[:, obj.var['highly_variable']].copy()
+
     return obj
 
 def main():
@@ -39,8 +44,8 @@ def main():
     SAVE_DIR = "output/" + args.model_name
     os.makedirs(SAVE_DIR, exist_ok=True)
 
-    file = "./data/pbmc3k/pbmc3k_raw.h5ad"
-    processed_file = "./data/pbmc3k/pbmc3k_processed.h5ad"
+    file = "./data/pbmc3k_raw.h5ad"
+    processed_file = "./data/pbmc3k_processed.h5ad"
     obj = load_dataset(file, processed_file)
 
     # Run the pipeline

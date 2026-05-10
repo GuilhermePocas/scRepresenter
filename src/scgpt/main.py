@@ -192,9 +192,9 @@ def run_scGPT(model_name, hyperparameter_defaults, adata, save_dir):
         if not model_dir.exists():
             print(f"Model directory {model_dir} not found. Downloading...")
 
-            drive_folder_url = "https://drive.google.com/drive/folders/1lcSPTGSmIgHQGhuTQCd2xQMHyJvRf5Sy?usp=drive_link"
+            drive_folder_url = "https://drive.google.com/drive/folders/1oWh_-ZRdhtoGQ2Fw24HP41FgLoomVo-y"
             model_dir.mkdir(parents=True, exist_ok=True)
-            gdown.download_folder(url=drive_folder_url, output=str(model_dir), quiet=False, use_cookies=False)
+            gdown.download_folder(url=drive_folder_url, output=str(model_dir), quiet=True, use_cookies=False)
 
             print(f"Download complete. Files saved to: {model_dir}")
 
@@ -511,7 +511,7 @@ def run_scGPT(model_name, hyperparameter_defaults, adata, save_dir):
     # In[ ]:
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
+    
     ntokens = len(vocab)  # size of vocabulary
     model = TransformerModel(
         ntokens,
@@ -543,7 +543,7 @@ def run_scGPT(model_name, hyperparameter_defaults, adata, save_dir):
     if config["load_model"] is not None:
         try:
             model.load_state_dict(torch.load(model_file))
-            logger.info(f"Loading all model params from {model_file}")
+            #logger.info(f"Loading all model params from {model_file}")
         except:
             # only load params that are in the model and match the size
             model_dict = model.state_dict()
@@ -553,8 +553,8 @@ def run_scGPT(model_name, hyperparameter_defaults, adata, save_dir):
                 for k, v in pretrained_dict.items()
                 if k in model_dict and v.shape == model_dict[k].shape
             }
-            for k, v in pretrained_dict.items():
-                logger.info(f"Loading params {k} with shape {v.shape}")
+            #for k, v in pretrained_dict.items():
+                #logger.info(f"Loading params {k} with shape {v.shape}")
             model_dict.update(pretrained_dict)
             model.load_state_dict(model_dict)
 
@@ -562,11 +562,11 @@ def run_scGPT(model_name, hyperparameter_defaults, adata, save_dir):
 
     # Freeze all pre-decoder weights
     for name, para in model.named_parameters():
-        print("-"*20)
-        print(f"name: {name}")
+        #print("-"*20)
+        #print(f"name: {name}")
         if config["freeze"] and "encoder" in name and "transformer_encoder" not in name:
         # if config.freeze and "encoder" in name:
-            print(f"freezing weights for: {name}")
+            #print(f"freezing weights for: {name}")
             para.requires_grad = False
 
     post_freeze_param_count = sum(dict((p.data_ptr(), p.numel()) for p in model.parameters() if p.requires_grad).values())
