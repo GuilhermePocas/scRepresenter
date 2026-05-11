@@ -5,7 +5,7 @@ import torch
 from .utils import train_scnet, train_scgpt, combine_embeddings
 
 
-def run_scRepresenter(model_name, obj, network, results_dir, scnet_epochs=0, scgpt_epochs=0, parameters_scnet = None, parameters_scgpt = None):
+def run_scRepresenter(model_name, obj, network, results_dir, scnet_epochs=0, scgpt_epochs=0, parameters_scnet = None, parameters_scgpt = None, training_obj = None):
 
     # --- Set up directories ---
     ANN_FILE = "../networks/" + network
@@ -43,6 +43,7 @@ def run_scRepresenter(model_name, obj, network, results_dir, scnet_epochs=0, scg
                 seed=0,
                 dataset_name="pbmc",
                 do_train=True,
+                test_size=0.4,
                 load_model="./src/scgpt/checkpoints/scGPT_human",
                 mask_ratio=0,
                 epochs=scgpt_epochs,
@@ -66,7 +67,7 @@ def run_scRepresenter(model_name, obj, network, results_dir, scnet_epochs=0, scg
                 DSBN = False,  # Domain-spec batchnorm
             )
 
-        scgpt_cell_embeddings, scgpt_labels = train_scgpt(obj, results_dir, parameters_scgpt)
+        scgpt_cell_embeddings, scgpt_labels = train_scgpt(obj, results_dir, parameters_scgpt, training_obj)
 
     #### COMBINE BOTH EMBEDDINGS #####
     if scnet_epochs > 0 and scgpt_epochs > 0:

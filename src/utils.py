@@ -30,28 +30,30 @@ def train_scnet(obj, dir, cfg):
     return scnet_cell_embeddings, scnet_labels
 
 
-def train_scgpt(obj, dir, cfg):
+def train_scgpt(obj, dir, cfg, training_obj=None):
 
     obj_scGPT = obj.copy()
-
     obj_scGPT.var_names = obj_scGPT.var_names.str.upper()
-    sc.pp.normalize_total(obj_scGPT, target_sum=1e4)
-    sc.pp.log1p(obj_scGPT)
-    sc.pp.highly_variable_genes(obj_scGPT, n_top_genes=2000)
-    obj_scGPT = obj_scGPT[:, obj_scGPT.var['highly_variable']].copy()
-    
-    train_idx, test_idx = train_test_split(
-        obj_scGPT.obs_names,
-        test_size=0.4,
-        stratify=obj.obs["celltype"],  # Ensure class balance
-        random_state=42
-    )
 
-    obj_scGPT_test = obj_scGPT[test_idx].copy()
-    obj_scGPT_train = obj_scGPT[train_idx].copy()
+    if training_obj is None:
 
-    obj_scGPT_train.obs["batch_id"] = obj_scGPT_train.obs["str_batch"] = "0"
-    obj_scGPT_test.obs["batch_id"] = obj_scGPT_test.obs["str_batch"] = "1"
+        train_idx, test_idx = train_test_split(
+            obj_scGPT.obs_names,
+            test_size=cfg['test_size'],
+            stratify=obj.obs["celltype"],  # Ensure class balance
+            random_state=42
+        )
+
+        obj_scGPT_test = obj_scGPT[test_idx].copy()
+        obj_scGPT_train = obj_scGPT[train_idx].copy()
+
+    else:
+
+        obj_scGPT_train = training_obj
+        obj_scGPT_test = obj_scGPT.copy()
+
+    #obj_scGPT_train.obs["batch_id"] = obj_scGPT_train.obs["str_batch"] = "0"
+    #obj_scGPT_test.obs["batch_id"] = obj_scGPT_test.obs["str_batch"] = "1"
     obj_scGPT_batch = obj_scGPT_train.concatenate(obj_scGPT_test, batch_key="str_batch")
 
     scGPT_dir = dir + "/scGPT"

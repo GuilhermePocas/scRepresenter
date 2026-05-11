@@ -1128,55 +1128,55 @@ def run_scGPT(model_name, hyperparameter_defaults, adata, save_dir):
     # In[ ]:
 
 
-    from sklearn.metrics import confusion_matrix
-    celltypes = sorted(list(set([id2type[p] for p in predictions] + list(celltypes))))
-    for i in set([id2type[p] for p in predictions]):
-        if i not in celltypes:
-            celltypes.remove(i)
-    cm = confusion_matrix(labels, predictions)
-    cm = cm.astype("float") / cm.sum(axis=1)[:, np.newaxis]
-    cm = pd.DataFrame(cm, index=celltypes[:cm.shape[0]], columns=celltypes[:cm.shape[1]])
-    plt.figure(figsize=(20, 20))
-    ax = sns.heatmap(cm, annot=True, fmt=".3f", cmap="Blues", cbar_kws={"shrink": 0.75}, annot_kws={"size": 18} )
-    ax.set_xticklabels(
-        ax.get_xticklabels(),
-        rotation=45,
-        horizontalalignment='right',
-        fontsize=14
-    )
-    ax.set_yticklabels(
-        ax.get_yticklabels(),
-        rotation=0,
-        fontsize=14
-    )
-    ax.set_xlabel("Predicted Label", fontsize=16)
-    ax.set_ylabel("True Label", fontsize=16)
-    plt.tight_layout()
-    plt.savefig(save_dir / "confusion_matrix.png", dpi=300)
+    #from sklearn.metrics import confusion_matrix
+    #celltypes = sorted(list(set([id2type[p] for p in predictions] + list(celltypes))))
+    #for i in set([id2type[p] for p in predictions]):
+    #    if i not in celltypes:
+    #        celltypes.remove(i)
+    #cm = confusion_matrix(labels, predictions)
+    #cm = cm.astype("float") / cm.sum(axis=1)[:, np.newaxis]
+    #cm = pd.DataFrame(cm, index=celltypes[:cm.shape[0]], columns=celltypes[:cm.shape[1]])
+    #plt.figure(figsize=(20, 20))
+    #ax = sns.heatmap(cm, annot=True, fmt=".3f", cmap="Blues", cbar_kws={"shrink": 0.75}, annot_kws={"size": 18} )
+    #ax.set_xticklabels(
+    #    ax.get_xticklabels(),
+    #    rotation=45,
+    #    horizontalalignment='right',
+    #    fontsize=14
+    #)
+    #ax.set_yticklabels(
+    #    ax.get_yticklabels(),
+    #    rotation=0,
+    #    fontsize=14
+    #)
+    #ax.set_xlabel("Predicted Label", fontsize=16)
+    #ax.set_ylabel("True Label", fontsize=16)
+    #plt.tight_layout()
+    #plt.savefig(save_dir / "confusion_matrix.png", dpi=300)
 
 
 
-    # Perform UMAP
-
-    umap_model = umap.UMAP()
-    umap_embedding = umap_model.fit_transform(np.array(list(test_cls.values())))
-
-    # Create a UMAP plot with cell classes
-    plt.figure(figsize=(20, 10))
-    sns.scatterplot(
-        x=umap_embedding[:, 0],
-        y=umap_embedding[:, 1],
-        hue=[id2type[p] for p in predictions],
-        palette="tab10",
-        s=20,
-        alpha=0.8
-    )
-
-    plt.xlabel('UMAP 1', fontsize=12)
-    plt.ylabel('UMAP 2', fontsize=12)
-    plt.legend(title="Cell Types", bbox_to_anchor=(1.05, 1), loc='upper left')
-    plt.tight_layout()  # Adjust the layout to ensure everything fits without overlap
-    plt.savefig(save_dir / "embeddings_umap.png", dpi=300)
+    ## Perform UMAP
+#
+    #umap_model = umap.UMAP()
+    #umap_embedding = umap_model.fit_transform(np.array(list(test_cls.values())))
+#
+    ## Create a UMAP plot with cell classes
+    #plt.figure(figsize=(20, 10))
+    #sns.scatterplot(
+    #    x=umap_embedding[:, 0],
+    #    y=umap_embedding[:, 1],
+    #    hue=[id2type[p] for p in predictions],
+    #    palette="tab10",
+    #    s=20,
+    #    alpha=0.8
+    #)
+#
+    #plt.xlabel('UMAP 1', fontsize=12)
+    #plt.ylabel('UMAP 2', fontsize=12)
+    #plt.legend(title="Cell Types", bbox_to_anchor=(1.05, 1), loc='upper left')
+    #plt.tight_layout()  # Adjust the layout to ensure everything fits without overlap
+    #plt.savefig(save_dir / "embeddings_umap.png", dpi=300)
 
     # In[ ]:
 

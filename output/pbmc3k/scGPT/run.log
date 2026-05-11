@@ -446,3 +446,104 @@
 	 feature length: 379
 16:57:28-scGPT-INFO-run_scGPT: Total Pre freeze Params 51335689
 16:57:28-scGPT-INFO-run_scGPT: Total Post freeze Params 51335689
+11:31:09-scGPT-INFO-run_scGPT: match 1803/2000 genes in vocabulary of size 60697.
+11:31:09-scGPT-INFO-run_scGPT: Resume model from src/scgpt/checkpoints/scGPT_human/best_model.pt, the model args will override the config src/scgpt/checkpoints/scGPT_human/args.json.
+11:31:09-scGPT-INFO-__call__: Normalizing total counts ...
+11:31:09-scGPT-INFO-__call__: Binning data ...
+11:31:10-scGPT-INFO-__call__: Normalizing total counts ...
+11:31:10-scGPT-INFO-__call__: Binning data ...
+11:31:10-scGPT-INFO-run_scGPT: train set number of samples: 1423, 
+	 feature length: 392
+11:31:10-scGPT-INFO-run_scGPT: valid set number of samples: 159, 
+	 feature length: 341
+11:31:12-scGPT-INFO-run_scGPT: Total Pre freeze Params 51335689
+11:31:12-scGPT-INFO-run_scGPT: Total Post freeze Params 51335689
+11:32:43-scGPT-INFO-train: | epoch   1 | 100/285 batches | lr 0.0001 | ms/batch 910.04 | loss  1.70 | cls  1.70 | err  0.59 | 
+11:34:16-scGPT-INFO-train: | epoch   1 | 200/285 batches | lr 0.0001 | ms/batch 929.98 | loss  1.15 | cls  1.15 | err  0.37 | 
+11:35:41-scGPT-INFO-run_scGPT: -----------------------------------------------------------------------------------------
+11:35:41-scGPT-INFO-run_scGPT: | end of epoch   1 | time: 269.56s | valid loss/mse 0.4692 | err 0.1069
+11:35:41-scGPT-INFO-run_scGPT: -----------------------------------------------------------------------------------------
+11:35:41-scGPT-INFO-run_scGPT: Best model with score 0.4692
+11:37:00-scGPT-INFO-test: Accuracy: 0.850, Precision: 0.511, Recall: 0.563, Macro F1: 0.533
+11:38:19-scGPT-INFO-run_scGPT: match 1803/2000 genes in vocabulary of size 60697.
+11:38:19-scGPT-INFO-run_scGPT: match 1803/2000 genes in vocabulary of size 60697.
+11:38:19-scGPT-INFO-run_scGPT: Resume model from src/scgpt/checkpoints/scGPT_human/best_model.pt, the model args will override the config src/scgpt/checkpoints/scGPT_human/args.json.
+11:38:19-scGPT-INFO-run_scGPT: Resume model from src/scgpt/checkpoints/scGPT_human/best_model.pt, the model args will override the config src/scgpt/checkpoints/scGPT_human/args.json.
+11:38:19-scGPT-INFO-__call__: Normalizing total counts ...
+11:38:19-scGPT-INFO-__call__: Normalizing total counts ...
+11:38:19-scGPT-INFO-__call__: Binning data ...
+11:38:19-scGPT-INFO-__call__: Binning data ...
+11:38:20-scGPT-INFO-__call__: Normalizing total counts ...
+11:38:20-scGPT-INFO-__call__: Normalizing total counts ...
+11:38:20-scGPT-INFO-__call__: Binning data ...
+11:38:20-scGPT-INFO-__call__: Binning data ...
+11:38:20-scGPT-INFO-run_scGPT: train set number of samples: 1423, 
+	 feature length: 392
+11:38:20-scGPT-INFO-run_scGPT: train set number of samples: 1423, 
+	 feature length: 392
+11:38:20-scGPT-INFO-run_scGPT: valid set number of samples: 159, 
+	 feature length: 341
+11:38:20-scGPT-INFO-run_scGPT: valid set number of samples: 159, 
+	 feature length: 341
+11:38:21-scGPT-INFO-run_scGPT: Total Pre freeze Params 51335689
+11:38:21-scGPT-INFO-run_scGPT: Total Pre freeze Params 51335689
+11:38:21-scGPT-INFO-run_scGPT: Total Post freeze Params 51335689
+11:38:21-scGPT-INFO-run_scGPT: Total Post freeze Params 51335689
+11:40:00-scGPT-INFO-train: | epoch   1 | 100/285 batches | lr 0.0001 | ms/batch 986.32 | loss  1.70 | cls  1.70 | err  0.59 | 
+11:40:00-scGPT-INFO-train: | epoch   1 | 100/285 batches | lr 0.0001 | ms/batch 986.32 | loss  1.70 | cls  1.70 | err  0.59 | 
+11:42:49-scGPT-INFO-train: | epoch   1 | 200/285 batches | lr 0.0001 | ms/batch 1690.04 | loss  1.11 | cls  1.11 | err  0.36 | 
+11:42:49-scGPT-INFO-train: | epoch   1 | 200/285 batches | lr 0.0001 | ms/batch 1690.04 | loss  1.11 | cls  1.11 | err  0.36 | 
+11:44:13-scGPT-INFO-run_scGPT: -----------------------------------------------------------------------------------------
+11:44:13-scGPT-INFO-run_scGPT: -----------------------------------------------------------------------------------------
+11:44:13-scGPT-INFO-run_scGPT: | end of epoch   1 | time: 351.51s | valid loss/mse 0.5380 | err 0.1635
+11:44:13-scGPT-INFO-run_scGPT: | end of epoch   1 | time: 351.51s | valid loss/mse 0.5380 | err 0.1635
+11:44:13-scGPT-INFO-run_scGPT: -----------------------------------------------------------------------------------------
+11:44:13-scGPT-INFO-run_scGPT: -----------------------------------------------------------------------------------------
+11:44:13-scGPT-INFO-run_scGPT: Best model with score 0.5380
+11:44:13-scGPT-INFO-run_scGPT: Best model with score 0.5380
+11:45:52-scGPT-INFO-train: | epoch   2 | 100/285 batches | lr 0.0000 | ms/batch 988.48 | loss  0.66 | cls  0.66 | err  0.20 | 
+11:45:52-scGPT-INFO-train: | epoch   2 | 100/285 batches | lr 0.0000 | ms/batch 988.48 | loss  0.66 | cls  0.66 | err  0.20 | 
+11:47:53-scGPT-INFO-train: | epoch   2 | 200/285 batches | lr 0.0000 | ms/batch 1209.93 | loss  0.59 | cls  0.59 | err  0.16 | 
+11:47:53-scGPT-INFO-train: | epoch   2 | 200/285 batches | lr 0.0000 | ms/batch 1209.93 | loss  0.59 | cls  0.59 | err  0.16 | 
+11:50:52-scGPT-INFO-run_scGPT: -----------------------------------------------------------------------------------------
+11:50:52-scGPT-INFO-run_scGPT: -----------------------------------------------------------------------------------------
+11:50:52-scGPT-INFO-run_scGPT: | end of epoch   2 | time: 399.66s | valid loss/mse 0.5065 | err 0.1447
+11:50:52-scGPT-INFO-run_scGPT: | end of epoch   2 | time: 399.66s | valid loss/mse 0.5065 | err 0.1447
+11:50:52-scGPT-INFO-run_scGPT: -----------------------------------------------------------------------------------------
+11:50:52-scGPT-INFO-run_scGPT: -----------------------------------------------------------------------------------------
+11:50:52-scGPT-INFO-run_scGPT: Best model with score 0.5065
+11:50:52-scGPT-INFO-run_scGPT: Best model with score 0.5065
+11:53:58-scGPT-INFO-train: | epoch   3 | 100/285 batches | lr 0.0000 | ms/batch 1850.65 | loss  0.49 | cls  0.49 | err  0.13 | 
+11:53:58-scGPT-INFO-train: | epoch   3 | 100/285 batches | lr 0.0000 | ms/batch 1850.65 | loss  0.49 | cls  0.49 | err  0.13 | 
+11:56:46-scGPT-INFO-train: | epoch   3 | 200/285 batches | lr 0.0000 | ms/batch 1683.69 | loss  0.44 | cls  0.44 | err  0.12 | 
+11:56:46-scGPT-INFO-train: | epoch   3 | 200/285 batches | lr 0.0000 | ms/batch 1683.69 | loss  0.44 | cls  0.44 | err  0.12 | 
+11:58:34-scGPT-INFO-run_scGPT: -----------------------------------------------------------------------------------------
+11:58:34-scGPT-INFO-run_scGPT: -----------------------------------------------------------------------------------------
+11:58:34-scGPT-INFO-run_scGPT: | end of epoch   3 | time: 461.53s | valid loss/mse 0.5792 | err 0.1321
+11:58:34-scGPT-INFO-run_scGPT: | end of epoch   3 | time: 461.53s | valid loss/mse 0.5792 | err 0.1321
+11:58:34-scGPT-INFO-run_scGPT: -----------------------------------------------------------------------------------------
+11:58:34-scGPT-INFO-run_scGPT: -----------------------------------------------------------------------------------------
+12:01:01-scGPT-INFO-train: | epoch   4 | 100/285 batches | lr 0.0000 | ms/batch 1467.37 | loss  0.41 | cls  0.41 | err  0.12 | 
+12:01:01-scGPT-INFO-train: | epoch   4 | 100/285 batches | lr 0.0000 | ms/batch 1467.37 | loss  0.41 | cls  0.41 | err  0.12 | 
+12:04:20-scGPT-INFO-train: | epoch   4 | 200/285 batches | lr 0.0000 | ms/batch 1988.20 | loss  0.38 | cls  0.38 | err  0.10 | 
+12:04:20-scGPT-INFO-train: | epoch   4 | 200/285 batches | lr 0.0000 | ms/batch 1988.20 | loss  0.38 | cls  0.38 | err  0.10 | 
+12:07:16-scGPT-INFO-run_scGPT: -----------------------------------------------------------------------------------------
+12:07:16-scGPT-INFO-run_scGPT: -----------------------------------------------------------------------------------------
+12:07:16-scGPT-INFO-run_scGPT: | end of epoch   4 | time: 522.00s | valid loss/mse 0.3179 | err 0.0692
+12:07:16-scGPT-INFO-run_scGPT: | end of epoch   4 | time: 522.00s | valid loss/mse 0.3179 | err 0.0692
+12:07:16-scGPT-INFO-run_scGPT: -----------------------------------------------------------------------------------------
+12:07:16-scGPT-INFO-run_scGPT: -----------------------------------------------------------------------------------------
+12:07:16-scGPT-INFO-run_scGPT: Best model with score 0.3179
+12:07:16-scGPT-INFO-run_scGPT: Best model with score 0.3179
+12:10:21-scGPT-INFO-train: | epoch   5 | 100/285 batches | lr 0.0000 | ms/batch 1853.56 | loss  0.30 | cls  0.30 | err  0.08 | 
+12:10:21-scGPT-INFO-train: | epoch   5 | 100/285 batches | lr 0.0000 | ms/batch 1853.56 | loss  0.30 | cls  0.30 | err  0.08 | 
+12:13:39-scGPT-INFO-train: | epoch   5 | 200/285 batches | lr 0.0000 | ms/batch 1977.16 | loss  0.31 | cls  0.31 | err  0.08 | 
+12:13:39-scGPT-INFO-train: | epoch   5 | 200/285 batches | lr 0.0000 | ms/batch 1977.16 | loss  0.31 | cls  0.31 | err  0.08 | 
+12:16:39-scGPT-INFO-run_scGPT: -----------------------------------------------------------------------------------------
+12:16:39-scGPT-INFO-run_scGPT: -----------------------------------------------------------------------------------------
+12:16:39-scGPT-INFO-run_scGPT: | end of epoch   5 | time: 562.50s | valid loss/mse 0.3428 | err 0.0881
+12:16:39-scGPT-INFO-run_scGPT: | end of epoch   5 | time: 562.50s | valid loss/mse 0.3428 | err 0.0881
+12:16:39-scGPT-INFO-run_scGPT: -----------------------------------------------------------------------------------------
+12:16:39-scGPT-INFO-run_scGPT: -----------------------------------------------------------------------------------------
+12:19:00-scGPT-INFO-test: Accuracy: 0.918, Precision: 0.802, Recall: 0.696, Macro F1: 0.709
+12:19:00-scGPT-INFO-test: Accuracy: 0.918, Precision: 0.802, Recall: 0.696, Macro F1: 0.709
