@@ -40,6 +40,15 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
+## Tutorial
+
+For usage examples, see the following notebooks:
+
+    - [Preprocessing](https://github.com/GuilhermePocas/scRepresenter/blob/main/scripts/Preprocessing.ipynb)
+    - [Model Training](https://github.com/GuilhermePocas/scRepresenter/blob/main/scripts/Model%20Training.ipynb)
+    - [Classification](https://github.com/GuilhermePocas/scRepresenter/blob/main/scripts/Classification.ipynb)
+    - [Embedding Analysis](https://github.com/GuilhermePocas/scRepresenter/blob/main/scripts/Embedding%20Analysis.ipynb)
+
 ##  Usage
 
 ### Data preprocessing
@@ -104,7 +113,7 @@ The resulting output objects are:
 
 - **labels**: the cell type labels, in the same order as the embeddings.
 
-For a detailed example see the Model Training notebook, where scRepresented is trained on the PBMC3k dataset from Scanpy.
+For a detailed example see the [Model Training notebook](https://github.com/GuilhermePocas/scRepresenter/blob/main/scripts/Model%20Training.ipynb), where scRepresented is trained on the PBMC3k dataset from Scanpy.
 
 <!--An example script is provided in ```/main.py```, using the pbmc3k dataset from Scanpy, and the human scGPT model checkpoint. To run the example, start the docker enviroment as previously explained, and run the following command:
 
@@ -122,7 +131,22 @@ with the following args:
 
 - **scgpt_epochs**: the number of training steps scGPT will run for. If its 0 this model is skipped.-->
 
-### Embedding analysis
+## Embedding analysis
+
+### Output structure 
+
+The scRepresenter pipeline outputs a .h5ad file containing the original expression counts that were used to train the model, as well as the following:
+
+    - The scNET embeddings;
+    - The scGPT embeddings;
+    - The scRepresenter embeddings, using the average of both models;
+    - the scRepresenter embeddings, using the concatenate of both models;
+
+These can all be found in the .obsm layer. Additionally, if you have completed the [Classification notebook](https://github.com/GuilhermePocas/scRepresenter/blob/main/scripts/Classification.ipynb), you can also find the corresponding predictions of each embedding in the .obs layer of the object. 
+
+Additionally 
+
+### Interactive data viewer
 
 A shiny application is also provided to better analyse the embedding objects produced by scRepresenter, allowing for the easy viewing of several insights and the creation of different types of plots and graphs. The application can be run locally from a Docker container, starting with building the docker image from the provided Dockerfile in the ```/app``` directory using the following command:
 
