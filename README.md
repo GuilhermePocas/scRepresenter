@@ -44,7 +44,7 @@ pip install -r requirements.txt
 
 For usage examples, see the following notebooks:
 
-- aPreprocessing](https://github.com/GuilhermePocas/scRepresenter/blob/main/scripts/Preprocessing.ipynb)
+- [Preprocessing](https://github.com/GuilhermePocas/scRepresenter/blob/main/scripts/Preprocessing.ipynb)
 - [Model Training](https://github.com/GuilhermePocas/scRepresenter/blob/main/scripts/Model%20Training.ipynb)
 - [Classification](https://github.com/GuilhermePocas/scRepresenter/blob/main/scripts/Classification.ipynb)
 - [Embedding Analysis](https://github.com/GuilhermePocas/scRepresenter/blob/main/scripts/Embedding%20Analysis.ipynb)
