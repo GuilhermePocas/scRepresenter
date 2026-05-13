@@ -44,10 +44,10 @@ pip install -r requirements.txt
 
 For usage examples, see the following notebooks:
 
-    - [Preprocessing](https://github.com/GuilhermePocas/scRepresenter/blob/main/scripts/Preprocessing.ipynb)
-    - [Model Training](https://github.com/GuilhermePocas/scRepresenter/blob/main/scripts/Model%20Training.ipynb)
-    - [Classification](https://github.com/GuilhermePocas/scRepresenter/blob/main/scripts/Classification.ipynb)
-    - [Embedding Analysis](https://github.com/GuilhermePocas/scRepresenter/blob/main/scripts/Embedding%20Analysis.ipynb)
+- aPreprocessing](https://github.com/GuilhermePocas/scRepresenter/blob/main/scripts/Preprocessing.ipynb)
+- [Model Training](https://github.com/GuilhermePocas/scRepresenter/blob/main/scripts/Model%20Training.ipynb)
+- [Classification](https://github.com/GuilhermePocas/scRepresenter/blob/main/scripts/Classification.ipynb)
+- [Embedding Analysis](https://github.com/GuilhermePocas/scRepresenter/blob/main/scripts/Embedding%20Analysis.ipynb)
 
 ##  Usage
 
@@ -137,10 +137,10 @@ with the following args:
 
 The scRepresenter pipeline outputs a .h5ad file containing the original expression counts that were used to train the model, as well as the following:
 
-    - The scNET embeddings;
-    - The scGPT embeddings;
-    - The scRepresenter embeddings, using the average of both models;
-    - the scRepresenter embeddings, using the concatenate of both models;
+- The scNET embeddings;
+- The scGPT embeddings;
+- The scRepresenter embeddings, using the average of both models;
+- the scRepresenter embeddings, using the concatenate of both models;
 
 These can all be found in the .obsm layer. Additionally, if you have completed the [Classification notebook](https://github.com/GuilhermePocas/scRepresenter/blob/main/scripts/Classification.ipynb), you can also find the corresponding predictions of each embedding in the .obs layer of the object. 
 
