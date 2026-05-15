@@ -35,6 +35,8 @@ conda activate condaenv
 pip install -r requirements.txt
 ```
 
+Make sure you have an [Anaconda Distribution](https://www.anaconda.com/download) installed.
+
 ### Docker
 
 We also provide two separate Dockerfiles depending on the availability of GPU capabilities. If one is available, which is highly recommended , run the following commands:
