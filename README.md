@@ -2,7 +2,7 @@
 
 # scRepresenter: a unified framework for computing and benchmarking biologically informed cellular representations in single-cell transcriptional data
 
-![scRepresenter Overview](docs/methodology.png)
+![scRepresenter Overview](docs/method.png)
 
 
 In this repository we introduce scRepresenter, an open-source, systematic workflow for computing, integrating, and validating multiple cellular embedding strategies within standard single-cell analysis pipelines. scRepresenter supports four categories of embedding representations: (1) expression-based, (2) knowledge-guided, (3) foundation model–derived, and (4) hybrid approaches that combine global transcriptomic context with structured biological priors. By enabling transparent comparison and principled integration of complementary embedding paradigms, scRepresenter provides a robust and systematic approach for interpreting complex single-cell datasets, particularly in challenging biological contexts. 
