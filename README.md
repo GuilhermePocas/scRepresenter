@@ -8,10 +8,6 @@ In single-cell RNA-sequencing (scRNA-seq) analysis, the quality of cellular embe
 
 To address this gap, we introduce scRepresenter—an open-source, systematic workflow for computing, integrating, and validating multiple cellular embedding strategies within standard single-cell analysis pipelines. scRepresenter supports four categories of embedding representations: (1) expres-sion-based, (2) knowledge-guided, (3) foundation model–derived, and (4) hybrid approaches that com-bine global transcriptomic context with structured biological priors. All strategies are evaluated under harmonized preprocessing and benchmarking conditions to ensure fair and systematic comparison. We benchmarked scRepresenter using data from a neurodegenerative disease model based on human brain organoids—multicellular, patient-specific, lab-grown cortical tissues. Our results show that hybrid embeddings consistently achieve higher macro F1-scores and better structural preservation, especially for rare and transcriptionally similar cell populations. Furthermore, unsupervised analyses revealed en-hanced recovery of reference cell-type structures across a range of clustering resolutions. By enabling transparent comparison and principled integration of complementary embedding paradigms, scRepre-senter provides a robust and systematic approach for interpreting complex single-cell datasets, particu-larly in challenging biological contexts. 
 
-<!-- **scRepresenter** is a computational workflow geared towards cell type classification, with a particular focus on accurately predicting rare cell types. It achieves this by bridging large-scale, expression-only Foundation Models, known for their accurate predictions, with domain-specific biological knowledge drawn from large graphs of relevant information.
-
-The workflow employs two methods for this purpose, the biological knowledge integration method [scNET, 2025](https://github.com/madilabcode/scNET), and the Foundation Model [scGPT, 2024](https://github.com/bowang-lab/scGPT). -->
-
 
 ##  Installation
 
@@ -114,22 +110,6 @@ The resulting output objects are:
 - **labels**: the cell type labels, in the same order as the embeddings.
 
 For a detailed example see the [Model Training notebook](https://github.com/GuilhermePocas/scRepresenter/blob/main/scripts/Model%20Training.ipynb), where scRepresenter is trained on the PBMC3k dataset from Scanpy.
-
-<!--An example script is provided in ```/main.py```, using the pbmc3k dataset from Scanpy, and the human scGPT model checkpoint. To run the example, start the docker environment as previously explained, and run the following command:
-
-```
-python main.py --model_name test --network PPI.csv --scnet_epochs 800 --scgpt_epochs 60
-```
-
-with the following args:
-
-- **model_name(str)**: the name of the current run.
-
-- **network**: the name of the gene similarity network to be used in this run. They can be found ```./src/networks``` 
-
-- **scnet_epochs**: the number of training steps scNET will run for. If its 0 this model is skipped.
-
-- **scgpt_epochs**: the number of training steps scGPT will run for. If its 0 this model is skipped.-->
 
 ## Embedding analysis
 
