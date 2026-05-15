@@ -16,24 +16,38 @@ To clone the repository, use the following command:
 git clone https://github.com/GuilhermePocas/scRepresenter.git
 ```
 
-A docker environment is recommended to avoid versioning issues. For this, we provide two Dockerfiles depending on the availability of GPU capabilities, which is highly recommended. In this case, run the following commands:
+It is possible to install the requirements directly to your computer, which requires Python 3.10 and should be done in a separate python environment.
+```
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+However, due to the large amount of packages this may lead to versioning issues, so one of the following environment is recommended:
+
+### Conda
+
+To install all the requirements in a conda environment, simply run:
+
+```
+conda create --name=condaenv python=3.10
+conda activate condaenv
+pip install -r requirements.txt
+```
+
+### Docker
+
+We also provide two separate Dockerfiles depending on the availability of GPU capabilities. If one is available, which is highly recommended , run the following commands:
 
 ```
 docker build -f Dockerfile.gpu -t env .
 docker run -it --gpus all --rm -v $(pwd)/output:/app/output env bash
 ```
 
-If no GPU is available, then use the CPU-based dockerfile through the following command:
+If no GPU is available, then use the CPU-based dockerfile by running the following:
 ```
 docker build -f Dockerfile.cpu -t env .
 docker run -it --rm -v $(pwd)/output:/app/output env bash
-```
-
-Alternatively, you can install the packages directly in your computer. This requires Python <= 3.9 and should be done in a separate python environment.
-```
-python -m venv .venv
-source venv/bin/activate
-pip install -r requirements.txt
 ```
 
 ##  Usage
