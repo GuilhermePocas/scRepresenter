@@ -151,7 +151,7 @@ docker run -p 3838:3838 shiny-app
 
 The application can then accessed through ```http://localhost:3838/``` using your internet browser. Any H5 embedding object produced by the pipeline can be uploaded here, and the specific embeddings described in the scRepresenter paper can be found [here](https://drive.google.com/file/d/19NVlnrTCTDOW9tHsVgjekZEyGVTTS1wJ/view?usp=sharing.)
 
-![shiny start](docs/shiny_start.png)
+![shiny start](docs/shiny_start2.png)
 
 First off, upload the desired .h5ad object, which should be the output of the scRepresenter pipeline. Additionally, in order to compare embeddings, you will need to classify each cell's embedding (see the [Classification notebook](https://github.com/GuilhermePocas/scRepresenter/blob/main/scripts/Classification.ipynb)). After pressing the "Load Object" button you will see a short summary of the object's available embeddings, as well as its metada columns.
 
