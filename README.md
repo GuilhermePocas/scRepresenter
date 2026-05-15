@@ -134,19 +134,30 @@ These can all be found in the ```.obsm``` attribute of the AnnData object. Addit
 
 ### Interactive data viewer (Shiny app)
 
-A shiny application is also provided to better analyse the embedding objects produced by scRepresenter, allowing for the exploration of the data and the creation of different types of plots and graphs. The application can be run locally from a Docker container, by building the docker image from the provided Dockerfile in the ```/app``` directory using the following command:
+A shiny application is also provided to better analyse the embedding objects produced by scRepresenter, allowing for the exploration of the data and the creation of plots and graphs. It requires R 4.5, and can be run locally.
+
+```
+cd app
+Rscript packages.R
+Rscript app.R
+```
+
+Alternatively, it can also be set up in a Docker container by building the docker image from the provided Dockerfile in the ```/app``` directory, and running the container.
 
 ```
 docker build -t shiny-app .
-```
-
-Then, by simply running the docker container:
-
-```
 docker run -p 3838:3838 shiny-app
 ```
 
 The application can then accessed through ```http://localhost:3838/``` using your internet browser. Any H5 embedding object produced by the pipeline can be uploaded here, and the specific embeddings described in the scRepresenter paper can be found [here](https://drive.google.com/file/d/19NVlnrTCTDOW9tHsVgjekZEyGVTTS1wJ/view?usp=sharing.)
+
+![shiny start](docs/shiny_start.png)
+
+First off, upload the desired .h5ad object, which should be the output of the scRepresenter pipeline. Additionally, in order to compare embeddings, you will need to classify each cell's embedding (see the [Classification notebook](https://github.com/GuilhermePocas/scRepresenter/blob/main/scripts/Classification.ipynb)). After pressing the "Load Object" button you will see a short summary of the object's available embeddings, as well as its metada columns.
+
+![shiny umap](docs/shiny_umap.png)
+
+After loading the object, you can go over to the "Explore" tab, where you can observe several features of the object. After selecting some global settings you can choose from several graphs and plots, such as the UMAP plots pictured above.
 
 ## Tutorial notebooks
 
